@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<%- include head.ejs %>
+<body>
+<%- include nav.ejs %>
+
+<div class="container">
+    <div class="row">
+        <section class="section section-features" id="section-features">
+            <div class="section-content">
+                <header class="section-head">
+                    <h2 class="section-title">
+                        <a href="https://www.tableau.com/products" target="_blank"><img src="/images/tableau.png"></a>
+                        <!--<hr class="header-dash">-->
+                    </h2>
+                </header>
+                <div class="section-body">
+                    <div class="section-entry">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr class="">
+                                    <th>&nbsp;</th>
+                                    <th class="public text-center">免費版</th>
+                                    <th class="professional text-center">專業版</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="">價格</td>
+                                    <td class="">免費</td>
+                                    <td class="">每人每月USD 70</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="">共享</td>
+                                    <td class="">可透過email及社群軟體共享圖表或嵌入網頁中<br>
+                                        工作簿及數據可選擇是否開放下載，但圖表會被公開瀏覽與分享
+                                    </td>
+                                    <td class="">可分享打包文件，用Tableau Reader 讀取<br>
+                                        可連接到私有的Tableau Server
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">保存</td>
+                                    <td class="">完成的檔案只能上傳至public server，無法存本機</td>
+                                    <td class="">Tableau Server<br>
+                                        本機
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">資料來源</td>
+                                    <td class="">Google 表格<br>
+                                        Excel、csv、JSON 檔案<br>
+                                        統計文件: SAS、SPSS和 R<br>
+                                        GIS檔案:ESRI(.shp)、KML和 geojson<br>
+                                        Web data connector<br>
+                                        OData<br>
+                                        除了不能連結資料庫外，其功能與桌面版相同
+                                    </td>
+                                    <td class="">免費版資料來源+資料庫</td>
+                                </tr>
+                                <tr>
+                                    <td class="">語言</td>
+                                    <td class="text-center" colspan="2">沒有繁體中文版本</td>
+                                </tr>
+                                <tr>
+                                    <td class="">瀏覽器</td>
+                                    <td class="text-center" colspan="2">IE8</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-features">
+            <div class='tableauPlaceholder' id='viz1491102861044' style='position: relative; padding: 10px'>
+                <noscript>
+                    <a href='#'><img alt='Dashboard 1 '
+                                     src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2016_196&#47;Dashboard1&#47;1_rss.png'
+                                     style='border: none'/></a>
+                </noscript>
+                <object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F'/>
+                    <param name='site_root' value=''/>
+                    <param name='name' value='2016_196&#47;Dashboard1'/>
+                    <param name='tabs' value='no'/>
+                    <param name='toolbar' value='no'/>
+                    <param name='static_image'
+                           value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2016_196&#47;Dashboard1&#47;1.png'/>
+                    <param name='animate_transition' value='yes'/>
+                    <param name='display_static_image' value='yes'/>
+                    <param name='display_spinner' value='yes'/>
+                    <param name='display_overlay' value='yes'/>
+                    <param name='display_count' value='yes'/>
+                </object>
+            </div>
+            <script type='text/javascript'>
+                var divElement = document.getElementById('viz1491102861044');
+                var vizElement = divElement.getElementsByTagName('object')[0];
+                vizElement.style.width = '100%';
+                vizElement.style.height = (divElement.offsetWidth * 0.5) + 'px';
+                var scriptElement = document.createElement('script');
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            </script>
+        </section>
+    </div>
+
+</div>
+
+</body>
+</html>

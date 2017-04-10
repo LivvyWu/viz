@@ -1,0 +1,318 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: #1c1a24;
+}
+
+section {
+    position: relative;
+    border: 5px solid #555;
+    margin-top: 30px;
+}
+
+section:before {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px solid #555;
+}
+
+.section-title {
+    text-align: center;
+    color: #3333CC;
+    font-weight: 900;
+}
+
+.section-content {
+    padding: 15px;
+    box-shadow: none;
+    margin-bottom: 20px;
+    min-height: 500px;
+}
+
+.section-head {
+    text-align: center;
+    margin-left: 10px;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    padding: 20px auto;
+    color: #3333CC;
+}
+
+.section-features a {
+    margin: 25px auto;
+    font-size: 18px;
+}
+
+.section-features a:hover {
+    text-decoration: none;
+}
+
+.header-dash {
+    border: 0 none;
+    border-top: 5px dotted #3333CC;
+    background: none;
+    height: 0;
+    width: 25px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.list-features {
+    padding-left: 0px;
+}
+
+.list-features li {
+    padding: 5px;
+    list-style: none;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.list-features li img {
+    padding-right: 10px;
+}
+
+/************* nav **************/
+.navbar-collapse {
+    font-size: 18px;
+}
+
+.navbar-nav > li > {
+    margin: 0 auto;
+}
+
+.navbar-nav > li > a {
+    font-weight: 900;
+    display: block;
+    color: #fff;
+    text-shadow: 0 1px 0 transparent;
+    background-color: #1A345C;
+    margin-right: 20px;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+    color: #e91e63;
+
+}
+
+/************* index **************/
+
+#index .btn-main {
+    margin-top: 50px;
+    color: #3333CC;
+    background-color: transparent;
+    border-color: #3333CC;
+    /*border-radius: 25px;*/
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-width: 2px;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+#index .btn-main:hover,
+#index .btn-main:focus {
+    color: #FFF;
+    background-color: #23238e;
+    border-color: #23238e;
+}
+
+#index .btn-main:hover .glyphicon-search {
+    transform: scale(1.2);
+    /*transition: all .1s ease-in;*/
+}
+
+#index .glyphicon-search {
+    top: 3px;
+}
+.headerContainer {
+    position: absolute;
+    top: 28%;
+    left: 20%;
+    display: block;
+    vertical-align: middle;
+    letter-spacing: 10px;
+}
+.headerContainer h1{
+    font-size: 46px;
+    font-weight: 900;
+    color: #3333CC;
+    line-height: 80px;
+}
+/************* R Studio **************/
+#rstudio h3 {
+    font-weight: bold;
+}
+
+.desc li {
+    list-style: circle;
+}
+
+.desc {
+    display: block;
+    margin-left: 25%;
+    line-height: 2em;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 20px;
+}
+
+/************* tableau **************/
+
+.table {
+    font-size: 18px;
+    text-align: left;
+}
+
+.table > tbody > tr > td {
+    padding: 15px;
+    max-width: 200px;
+}
+
+.table > tbody > tr > td:nth-child(1) {
+    width: 120px;
+}
+
+/************* tools **************/
+
+/************* charts **************/
+#charts .section-head {
+    padding: 1px;
+}
+
+#charts .icon:before,
+#charts .icon:after {
+    background: #3333CC;
+}
+#charts .btn-main {
+    margin-top: 20px;
+    color: #fff;
+    background-color: #3333CC;
+    border-color: #3333CC;
+    border-radius: 25px;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-width: 2px;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+#charts .btn-main:hover,
+#charts .btn-main:focus {
+    color: #FFF;
+    background-color: #23238e;
+    border-color: #23238e;
+}
+
+#charts .btn-main:hover .glyphicon-chevron-right {
+    transition-property: transform;
+    transform: translateX(5px);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+#charts .glyphicon-chevron-right {
+    top: 3px;
+    color: #FFFFFF;
+}
+
+/************* notes & charts icon**************/
+
+.icon {
+    padding: 0 10px;
+    font-size: 15px;
+    line-height: 18px;
+    position: relative;
+    margin-bottom: 25px;
+    display: inline-block;
+
+}
+
+.icon:before {
+    left: 100%;
+}
+
+.icon:after {
+    right: 100%;
+}
+
+.icon:before,
+.icon:after {
+    top: 10px;
+    height: 2px;
+    content: " ";
+    width: 100px;
+    background: #e91e63;
+    position: absolute;
+}
+
+/************* notes **************/
+#notes .section-title,
+#notes .section-head {
+    color: #e91e63;
+}
+
+#notes .icon:before,
+#notes .icon:after {
+    background: #e91e63;
+}
+
+.detail {
+    border-top: 1px dashed #555;
+    font-size: 22px;
+    color: #555;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+    line-height: 2em;
+}
+
+.detail h2 {
+    color: #555;
+}
+
+.detail li {
+    list-style: none;
+}
+
+i.glyphicon-pencil {
+    background-color: #e91e63;
+    color: #FFFFFF;
+    width: 50px;
+    height: 50px;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 17px;
+    margin: 20px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #e91e63;
+    border-radius: 50%;
+}
+
+i.glyphicon-pencil:after {
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    content: " ";
+    position: absolute;
+    border: 1px solid #e91e63;
+    border-radius: 50% !important;
+}
+

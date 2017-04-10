@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+<%- include head.ejs %>
+<script>
+    //        var host = "http://210.65.138.65:9000";
+    var host = "http://localhost:9000";
+
+    <!-- amChart_dualAxes start -->
+    function amChart_dualAxes(data) {
+        AmCharts.makeChart("am_chart", {
+            "backgroundColor": "#ffffff",
+            "addClassNames": true,
+            "startDuration": 0.5,
+            "titles": [{
+                "text": "農產品交易市場行情-牛番茄",
+                "size": 20
+            }, {
+                "text": "Source: 智慧農業API",
+                "bold": false
+            }],
+            "type": "serial",
+            "theme": "patterns",
+                "handDrawn": true,
+                "handDrawScatter": 3,
+            "legend": {
+                "equalWidths": false,
+                "useGraphSettings": true,
+                "valueAlign": "left",
+                "valueWidth": 120
+            },
+            "dataProvider": data,
+            "valueAxes": [{
+                "id": "priceAxis",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "position": "left",
+                "title": "價格(元)"
+            }, {
+                "id": "qtyAxis",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "labelsEnabled": false,
+                "position": "right",
+                "title": "交易量(公斤)"
+            }, {
+                "id": "transdateAxis",
+                "duration": "mm",
+                "durationUnits": {
+                    "hh": "h ",
+                    "mm": "min"
+                },
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "inside": true,
+                "position": "right",
+                "title": "交易日期"
+            }],
+            "graphs": [{
+//                    "id": "g1",
+//                    "animationPlayed": true,
+                "balloonText": "[[title]]:[[value]] KG",
+                "alphaField": "[[title]]",
+                "dashLengthField": "dashLength",
+                "fillAlphas": 0.5,
+                "legendPeriodValueText": "total[[value.sum]]KG",
+                "legendValueText": "[[value]] KG",
+                "descriptionField": "[[title]]",
+                "labelPosition": "right",
+                "title": "交易量",
+                "type": "column",
+                "valueField": "qty",
+                "valueAxis": "qtyAxis"
+            }, {
+//                    "id": "g2",
+//                    "animationPlayed": true,
+                "balloonText": "[[title]]:[[value]]",
+                "bulletSize": 8,
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "useLineColorForBulletBorder": true,
+                "bulletColor": "#FFFFFF",
+                "bulletSizeField": "[[title]]",
+                "dashLengthField": "dashLength",
+                "descriptionField": "[[title]]",
+                "labelPosition": "right",
+                "legendValueText": "[[value]]",
+                "title": "上價",
+                "fillAlphas": 0,
+                "valueField": "u_price",
+                "valueAxis": "priceAxis",
+                "lineColor": "#333333"
+            }, {
+//                    "id": "g3",
+//                    "animationPlayed": true,
+                "balloonText": "[[title]]:[[value]]",
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "useLineColorForBulletBorder": true,
+                "bulletColor": "#FFFFFF",
+                "bulletSizeField": "[[title]]",
+                "dashLengthField": "dashLength",
+                "descriptionField": "[[title]]",
+                "labelPosition": "right",
+                "legendValueText": "[[value]]",
+                "title": "下價",
+                "fillAlphas": 0,
+                "valueField": "l_price",
+                "valueAxis": "priceAxis",
+                "lineColor": "#00FF00"
+            }, {
+                "id": "g4",
+                "balloonText": "[[title]]:[[value]]",
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "useLineColorForBulletBorder": true,
+                "bulletColor": "#FFFFFF",
+                "bulletSizeField": "[[title]]",
+                "dashLengthField": "dashLength",
+                "descriptionField": "[[title]]",
+                "labelPosition": "right",
+                "legendValueText": "[[value]]",
+                "title": "平均價",
+                "fillAlphas": 0,
+                "valueField": "avg_price",
+                "valueAxis": "priceAxis",
+                "lineColor": "#FF8C00"
+            }],
+            "chartCursor": {
+                "categoryBalloonDateFormat": "DD",
+                "cursorAlpha": 0.1,
+                "cursorColor": "#000000",
+                "fullWidth": true,
+                "valueBalloonsEnabled": false,
+                "zoomable": false
+            },
+            "dataDateFormat": "YYYY-MM-DD",
+            "categoryField": "trans_date",
+            "categoryAxis": {
+                "dateFormats": [{
+                    "period": "DD",
+                    "format": "DD"
+                }, {
+                    "period": "WW",
+                    "format": "MMM DD"
+                }, {
+                    "period": "MM",
+                    "format": "MMM"
+                }, {
+                    "period": "YYYY",
+                    "format": "YYYY"
+                }],
+                "parseDates": true,
+                "autoGridCount": false,
+                "axisColor": "#555555",
+                "gridAlpha": 0.1,
+                "gridColor": "#FFFFFF",
+                "gridCount": 50
+            },
+            "export": {
+                "enabled": true
+            }
+        });
+    }
+
+    <!-- amChart_stockChart start -->
+    function amChart_stockChart(data) {
+
+        AmCharts.makeChart("am_stock", {
+
+            "backgroundColor": "#ffffff",
+            "type": "stock",
+            "theme": "light",
+            "handDrawn": true,
+            "handDrawScatter": 3,
+            "dataSets": [{
+                "color": "#b0de09",
+                "fieldMappings": [{
+                    "fromField": "u_price",
+                    "toField": "u_price"
+                }, {
+                    "fromField": "l_price",
+                    "toField": "l_price"
+                }, {
+                    "fromField": "avg_price",
+                    "toField": "avg_price"
+                }],
+                "dataProvider": data,
+                "categoryField": "trans_date"
+            }],
+
+
+            "panels": [{
+                "showCategoryAxis": true,
+                "title": "價格(元)",
+                "eraseAll": false,
+//                    "allLabels": [ {
+//                        "x": 0,
+//                        "y": 0,
+//                        "text": "Click on the pencil icon on top-right to start drawing",
+//                        "align": "center",
+//                        "size": 16
+//                    } ],
+
+                "stockGraphs": [{
+                    "id": "g1",
+                    "lineThickness": 2,
+                    "valueField": "u_price",
+                    "title": "上價",
+                    "balloonText": "上價:<b>[[value]]</b>",
+                    "compareGraphBalloonText": "[[title]]:<b>[[value]]</b>",
+                    "useDataSetColors": false
+                }, {
+                    "id": "g2",
+                    "lineThickness": 2,
+                    "valueField": "l_price",
+                    "title": "下價",
+                    "balloonText": "下價:<b>[[value]]</b>",
+                    "compareGraphBalloonText": "[[title]]:<b>[[value]]</b>",
+                    "useDataSetColors": false
+                }, {
+                    "id": "g3",
+                    "lineThickness": 2,
+                    "valueField": "avg_price",
+                    "title": "平均價",
+                    "balloonText": "[[title]]:<b>[[value]]</b>",
+                    "compareGraphBalloonText": "平均價:<b>[[value]]</b>",
+                    "useDataSetColors": false
+                }],
+
+                "stockLegend": {
+                    "valueTextRegular": "1",
+                    "markerType": "none"
+                },
+
+                "drawingIconsEnabled": false
+            }],
+
+            "chartScrollbarSettings": {
+                "graph": "g1"
+            }
+            ,
+            "chartCursorSettings": {
+                "valueBalloonsEnabled": true
+            }
+            ,
+            "periodSelector": {
+                "position": "bottom",
+                "periods": [{
+                    "period": "DD",
+                    "count": 10,
+                    "label": "10 days"
+                }, {
+                    "period": "MM",
+                    "count": 1,
+                    "label": "1 month"
+                }, {
+                    "period": "YYYY",
+                    "count": 1,
+                    "label": "1 year"
+                }, {
+                    "period": "YTD",
+                    "label": "YTD"
+                }, {
+                    "period": "MAX",
+                    "label": "MAX"
+                }]
+            }
+        });
+
+
+        //            var chart = AmCharts.makeChart("am_stock", {
+        //
+        //                "type": "serial",
+        //                "theme": "light",
+        //                "marginRight": 40,
+        //                "marginLeft": 40,
+        //                "autoMarginOffset": 20,
+        //                "mouseWheelZoomEnabled": true,
+        //                "dataDateFormat": "YYYY-MM-DD",
+        //                "valueAxes": [{
+        //                    "id": "v1",
+        //                    "axisAlpha": 0,
+        //                    "position": "left",
+        //                    "ignoreAxisWidth": true
+        //                }],
+        //                "balloon": {
+        //                    "borderThickness": 1,
+        //                    "shadowAlpha": 0
+        //                },
+        //                "graphs": [{
+        //                    "id": "g1",
+        //                    "balloon": {
+        //                        "drop": true,
+        //                        "adjustBorderColor": false,
+        //                        "color": "#ffffff"
+        //                    },
+        //                    "bullet": "round",
+        //                    "bulletBorderAlpha": 1,
+        //                    "bulletColor": "#FFFFFF",
+        //                    "bulletSize": 5,
+        //                    "hideBulletsCount": 50,
+        //                    "lineThickness": 2,
+        //                    "title": "上價",
+        //                    "useLineColorForBulletBorder": true,
+        //                    "valueField": "u_price",
+        //                    "balloonText": "上價:[[value]]"
+        //                },{
+        //                    "id": "g2",
+        //                    "balloon": {
+        //                        "drop": true,
+        //                        "adjustBorderColor": false,
+        //                        "color": "#ffffff"
+        //                    },
+        //                    "bullet": "round",
+        //                    "bulletBorderAlpha": 1,
+        //                    "bulletColor": "#FFFFFF",
+        //                    "bulletSize": 5,
+        //                    "hideBulletsCount": 50,
+        //                    "lineThickness": 2,
+        //                    "title": "下價",
+        //                    "useLineColorForBulletBorder": true,
+        //                    "valueField": "l_price",
+        //                    "balloonText": "下價:[[value]]"
+        //                },{
+        //                    "id": "g3",
+        //                    "balloon": {
+        //                        "drop": true,
+        //                        "adjustBorderColor": false,
+        //                        "color": "#ffffff"
+        //                    },
+        //                    "bullet": "round",
+        //                    "bulletBorderAlpha": 1,
+        //                    "bulletColor": "#FFFFFF",
+        //                    "bulletSize": 5,
+        //                    "hideBulletsCount": 50,
+        //                    "lineThickness": 2,
+        //                    "title": "平均價",
+        //                    "useLineColorForBulletBorder": true,
+        //                    "valueField": "avg_price",
+        //                    "balloonText": "平均價:[[value]]"
+        //                }],
+        //                "chartScrollbar": {
+        //                    "graph": "g1",
+        //                    "oppositeAxis": false,
+        //                    "offset": 30,
+        //                    "scrollbarHeight": 80,
+        //                    "backgroundAlpha": 0,
+        //                    "selectedBackgroundAlpha": 0.1,
+        //                    "selectedBackgroundColor": "#888888",
+        //                    "graphFillAlpha": 0,
+        //                    "graphLineAlpha": 0.5,
+        //                    "selectedGraphFillAlpha": 0,
+        //                    "selectedGraphLineAlpha": 1,
+        //                    "autoGridCount": true,
+        //                    "color": "#AAAAAA"
+        //                },
+        //                "chartCursor": {
+        //                    "pan": true,
+        //                    "valueLineEnabled": true,
+        //                    "valueLineBalloonEnabled": true,
+        //                    "cursorAlpha": 1,
+        //                    "cursorColor": "#258cbb",
+        //                    "limitToGraph": "g1",
+        //                    "valueLineAlpha": 0.2,
+        //                    "valueZoomable": true
+        //                },
+        //                "valueScrollbar": {
+        //                    "oppositeAxis": false,
+        //                    "offset": 50,
+        ////                    "scrollbarHeight": 10
+        //                },
+        //                "categoryField": "trans_date",
+        //                "categoryAxis": {
+        //                    "parseDates": true,
+        //                    "dashLength": 1,
+        //                    "minorGridEnabled": true
+        //                },
+        //                "export": {
+        //                    "enabled": true
+        //                },
+        //                "dataProvider": data
+        //            });
+        //
+        //            chart.addListener("rendered", zoomChart);
+        //
+        //            zoomChart();
+
+        //            function zoomChart() {
+        //                chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
+        //            }
+    }
+
+    <!-- highChart_dualAxes start -->
+    function highChart_dualAxes(u_price, l_price, avg_price, qty, trans_date) {
+        Highcharts.chart('hi_chart', {
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: '農產品交易市場行情-牛番茄'
+            },
+            subtitle: {
+                text: 'Source: 智慧農業API'
+            },
+            xAxis: [{
+                type: 'datetime',
+                title: {
+                    text: '日期'
+                },
+                categories: trans_date,
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                title: {
+                    text: '價格(元)',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                }
+            }, { // Secondary yAxis
+                title: {
+                    text: '交易量(公斤)',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value} 公斤',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 100,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [{
+                name: '交易量',
+                type: 'column',
+                data: qty,
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: 'KG'
+                }
+            }, {
+                name: '上價',
+                type: 'spline',
+                data: u_price,
+                tooltip: {
+                    valueSuffix: ' 公斤'
+                }
+            }, {
+                name: '下價',
+                type: 'spline',
+                data: l_price,
+                tooltip: {
+                    valueSuffix: ' 公斤'
+                }
+            }, {
+                name: '平均價',
+                type: 'spline',
+                data: avg_price,
+                tooltip: {
+                    valueSuffix: ' 公斤'
+                }
+            }]
+        });
+    }
+    <!-- highChart_stockChart start -->
+    function highChart_stockChart(data) {
+        /**
+         * Create the chart when all data is loaded
+         * @returns {undefined}
+         */
+        function createChart() {
+
+            Highcharts.stockChart('hi_stock', {
+//
+                title: {
+                    text: '農產品交易市場行情-牛番茄'
+                },
+                subtitle: {
+                    text: 'Source: 智慧農業API'
+                },
+                rangeSelector: {
+
+                    buttons: [{
+                        type: 'day',
+                        count: 10,
+                        text: '10d'
+                    }, {
+                        type: 'month',
+                        count: 1,
+                        text: '1m'
+                    }, {
+                        type: 'month',
+                        count: 3,
+                        text: '3m'
+                    }, {
+                        type: 'year',
+                        count: 1,
+                        text: '1y'
+                    }, {
+                        type: 'all',
+                        text: 'All'
+                    }],
+                    selected: 2
+                },
+                xAxis: {
+                    type: 'datetime',
+                    showLastTickLabel: true,
+                    dateTimeLabelFormats: {
+                        day: '%Y-%m-%d'
+                    }
+
+                },
+                yAxis: {
+                    title: {
+                        text: '價格(元)'
+                    },
+
+                    labels: {
+
+                        align: 'left'
+//                            formatter: function () {
+//                                return (this.value > 0 ? ' + ' : '') + this.value + '%';
+//                            }
+                    }
+//                        plotLines: [{
+//                            value: 0,
+//                            width: 2,
+//                            color: 'silver'
+//                        }]
+                },
+
+//                    plotOptions: {
+//                        series: {
+//                            compare: 'percent',
+//                            showInNavigator: true
+//                        }
+//                    },
+
+                tooltip: {
+//                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                    valueDecimals: 1,
+                    split: true
+                },
+                series: seriesOptions
+            });
+        }
+
+        var seriesOptions = [],
+            seriesCounter = 0
+        var u_data = [];
+        var avg_data = [];
+        var l_data = [];
+
+        data.forEach(function (d) {
+            u_data.push([Date.parse(new Date(d.trans_date)), parseInt(d.u_price)]);
+            avg_data.push([Date.parse(new Date(d.trans_date)), parseInt(d.avg_price)]);
+            l_data.push([Date.parse(new Date(d.trans_date)), parseInt(d.l_price)]);
+        });
+        console.log(u_data);
+        var datas = [['上價', u_data], ['平均價', avg_data], ['下價', l_data]];
+
+        $.each(datas, function (i, data) {
+
+            seriesOptions[i] = {
+                name: data[0],
+                data: data[1]
+            };
+
+
+            if (seriesCounter === data.length) {
+                createChart();
+            }
+            seriesCounter += 1;
+        });
+
+//            $.each(names, function (i, name) {
+//
+//                $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?', function (data) {
+//
+//                    console.log(data);
+//                    seriesOptions[i] = {
+//                        name: name,
+//                        data: data
+//                    };
+//
+//                    // As we're loading the data asynchronously, we don't know what order it will arrive. So
+//                    // we keep a counter and create the chart when all the data is loaded.
+//                    seriesCounter += 1;
+//
+//                    if (seriesCounter === names.length) {
+//                    }
+//                });
+//            });
+    }
+
+    <!-- plotly_dualAxes start -->
+    function plotly_dualAxes(u_price, l_price, avg_price, qty, trans_date) {
+
+        var trace1 = {
+            x: trans_date,
+            y: qty,
+            name: '交易量',
+            yaxis: 'y',
+            type: 'bar',
+            marker: {color: 'rgb(96, 172, 225)'},
+            opacity: 0.8
+        };
+
+        var trace2 = {
+            x: trans_date,
+            y: u_price,
+            name: '上價',
+            yaxis: 'y2',
+            mode: 'lines+markers',
+            marker: {
+                color: 'rgb(75, 75, 75)',
+                size: 8,
+                symbol: 'circle'
+            }
+        };
+
+        var trace3 = {
+            x: trans_date,
+            y: l_price,
+            name: '下價',
+            yaxis: 'y2',
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: {
+                color: 'rgb(117, 231, 117)',
+                size: 6,
+                symbol: 'diamond'
+            }
+        };
+
+        var trace4 = {
+            x: trans_date,
+            y: avg_price,
+            name: '平均價',
+            yaxis: 'y2',
+            dtick: 20,
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: {
+                color: 'rgb(255, 165, 0)',
+                size: 8,
+                symbol: 'square'
+            }
+        };
+
+        data = [trace1, trace2, trace3, trace4];
+
+        var layout = {
+            title: '農產品交易市場行情-牛番茄',
+            xaxis: {
+
+                showgrid: false,                  // remove the x-axis grid lines
+                tickformat: "%e, %B"              // customize the date format to "month, day",
+
+            },
+            yaxis: {
+                zeroline: true,
+                side: 'right',
+                title: '價格(元)'
+            },
+            yaxis2: {
+                zeroline: false,
+                title: '交易量(公斤)',
+                showgrid: false,
+                overlaying: 'y'
+            },
+            legend: {
+                x: 0.05,
+                y: 1
+            }
+        };
+
+        Plotly.newPlot('plot_chart', data, layout);
+    }
+
+
+    <!-- plotly_stockChart start -->
+    function plotly_stockChart(u_price, l_price, avg_price, qty, trans_date) {
+        var xField = 'Date';
+        var yField = 'Mean_TemperatureC';
+
+        var trace1 = {
+            x: trans_date,
+            y: u_price,
+            name: '上價',
+            yaxis: 'y2',
+            mode: 'lines'
+        };
+
+        var trace2 = {
+            x: trans_date,
+            y: l_price,
+            name: '下價',
+            yaxis: 'y2',
+            type: 'scatter',
+            mode: 'lines'
+        };
+
+        var trace3 = {
+            x: trans_date,
+            y: avg_price,
+            name: '平均價',
+            yaxis: 'y2',
+            dtick: 20,
+            type: 'scatter',
+            mode: 'lines'
+        };
+
+        var data = [trace1, trace2, trace3];
+
+        var selectorOptions = {
+            buttons: [{
+                step: 'month',
+                stepmode: 'backward',
+                count: 1,
+                label: '1m'
+            }, {
+                step: 'month',
+                stepmode: 'backward',
+                count: 6,
+                label: '6m'
+            }, {
+                step: 'year',
+                stepmode: 'todate',
+                count: 1,
+                label: 'YTD'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 1,
+                label: '1y'
+            }, {
+                step: 'all'
+            }]
+        };
+        var layout = {
+            title: '農產品交易市場行情-牛番茄',
+            xaxis: {
+                rangeselector: selectorOptions,
+                rangeslider: {
+                    visible: true,  // or xaxis.showrangeslider ?
+//                        autorange: false,
+//                        range: trans_date,
+
+                    // some attribute combination to determine what to show in the slider box e.g.
+                    mode: 'traces',   // or 'array' or maybe 'mean'
+                    showtraces: [0],  // would show the first trace (this is the Highcharts default)
+                    array: [],  // would show custom data in the slider box
+
+                    len: 0.1,    // length in the vertical in normalized coordinates
+                                 // (N.B. len is a colorbar attribute)
+
+                    // some border options e.g.
+                    borderwidth: 1,
+                    bordercolor: '#fff',
+
+                    // maybe later
+                    side: 'bottom'   // 'top'
+                }
+            },
+            yaxis: {
+                fixedrange: true
+            }
+        };
+
+        Plotly.plot('plot_stock', data, layout);
+
+    }
+
+    $(document).ready(function () {
+
+        $.getJSON('/charts/data', function (data) {
+
+            var u_price = [];
+            var l_price = [];
+            var avg_price = [];
+            var qty = [];
+            var trans_date = [];
+            data = JSON.parse(data);
+            data.forEach(function (d) {
+                u_price.push(parseInt(d.u_price));
+                l_price.push(parseInt(d.l_price));
+                avg_price.push(parseInt(d.avg_price));
+                qty.push(parseInt(d.qty));
+                trans_date.push(new Date(d.trans_date).toJSON().slice(0, 10));
+            });
+
+            amChart_dualAxes(data);
+            highChart_dualAxes(u_price, l_price, avg_price, qty, trans_date);
+            plotly_dualAxes(u_price, l_price, avg_price, qty, trans_date);
+
+            amChart_stockChart(data);
+            highChart_stockChart(data);
+            plotly_stockChart(u_price, l_price, avg_price, qty, trans_date);
+        });
+
+
+//            $.ajax({
+//                url: host + "/api/TransInfos/type/veg/prodTransPrice/market/104/masterCode/FJ/sdate/2016-01-01/edate/2016-03-31"
+//            }).done(function (data) {
+//
+//
+//
+//
+//            });
+    });
+
+
+</script>
+
+</head>
+<body>
+<%- include nav.ejs %>
+
+<div id="notes">
+    <section class="">
+        <header class="section-head"><h2 class="section-title">amCharts</h2>
+            <span class="icon"><i class="glyphicon glyphicon-th-large"></i></span>
+        </header>
+        <div class="section-content">
+            <div id="am_chart" style="width:100%; height:400px;"></div>
+            <div id="am_stock" style="width:100%; height:400px;"></div>
+        </div>
+        <div class="detail">
+            <i class="glyphicon glyphicon-pencil"></i>
+            <ul>
+                <li>最好套用</li>
+                <li>資料來源格式比較統一</li>
+                <li>有動畫、有手繪風</li>
+                <li>可塗鴉</li>
+                <li>文件容易閱讀</li>
+                <li>RWD</li>
+                <li>可以JSON格式儲存圖表及資料</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="">
+        <header class="section-head"><h2 class="section-title">Highcharts</h2>
+            <span class="icon"><i class="glyphicon glyphicon-th-large"></i></span>
+        </header>
+        <div class="section-content">
+            <div id="hi_chart" style="width:100%; height:400px;"></div>
+            <div id="hi_stock" style="width:100%; height:400px;"></div>
+        </div>
+        <div class="detail">
+            <i class="glyphicon glyphicon-pencil"></i>
+            <ul>
+                <li>也算好套用</li>
+                <li>動畫最流暢</li>
+                <li>文件容易閱讀</li>
+                <li>RWD</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="">
+        <header class="section-head"><h2 class="section-title">Plotly</h2>
+            <span class="icon"><i class="glyphicon glyphicon-th-large"></i></span>
+        </header>
+        <div class="section-content">
+            <div id="plot_chart" style="width:100%; height:400px;"></div>
+            <div id="plot_stock" style="width:100%; height:400px;"></div>
+        </div>
+        <div class="detail">
+            <i class="glyphicon glyphicon-pencil"></i>
+            <ul>
+                <li>相對較不易套用</li>
+                <li>可儲存於私人空間</li>
+                <li>轉換不同語言(R/Python/Matlab)程式碼，超強大</li>
+                <li>可以JSON格式儲存圖表及資料</li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
